@@ -109,7 +109,7 @@ const LeverageSliderHandle = forwardRef<Handle, HandleProps>(function LeverageSl
 });
 
 function generateEquallySpacedArray(min: number, max: number, shouldIncludeMax?: boolean): number[] {
-  const step = (max - min) / 10;
+  const step = (max - min) / 100;
   let array = range(min, max, step).map((num) => parseFloat(num.toFixed(2)));
 
   if (shouldIncludeMax && array[array.length - 1] !== max) {
