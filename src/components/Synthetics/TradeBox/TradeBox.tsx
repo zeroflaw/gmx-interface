@@ -1252,7 +1252,7 @@ export function TradeBox(p: Props) {
               beforeSwitchContent={
                 <div className={cx({ invisible: !isLeverageEnabled })}>
                   <SuggestionInput
-                    inputClassName="w-40 text-right"
+                    inputClassName="w-48 text-right"
                     value={leverageInputValue}
                     setValue={setLeverageInputValue}
                     onBlur={handleLeverageInputBlur}
