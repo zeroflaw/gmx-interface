@@ -7,7 +7,7 @@ import "rc-slider/assets/index.css";
 import "./LeverageSlider.scss";
 
 const defaultMarks = [1.1, 2, 5, 10, 15, 20, 25, 30, 35, 40, 50];
-const DEFAULT_LEVERAGE_KEY = 20;
+const DEFAULT_LEVERAGE_KEY = 1;
 
 type Props = {
   isPositive?: boolean;
@@ -72,7 +72,7 @@ export function LeverageSlider(p: Props) {
       <Slider
         min={0}
         max={max}
-        step={0.1}
+        step={0.001}
         marks={marksLabel}
         handle={customHandle}
         onChange={handleChange}
