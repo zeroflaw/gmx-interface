@@ -7,7 +7,7 @@ import "rc-slider/assets/index.css";
 import "./LeverageSlider.scss";
 
 const defaultMarks = [1.1, 2, 5, 10, 15, 20, 25, 30, 35, 40, 50];
-const DEFAULT_LEVERAGE_KEY = 1;
+const DEFAULT_LEVERAGE_KEY = 20;
 
 type Props = {
   isPositive?: boolean;
@@ -72,7 +72,7 @@ export function LeverageSlider(p: Props) {
       <Slider
         min={0}
         max={max}
-        step={0.001}
+        step={0.01}
         marks={marksLabel}
         handle={customHandle}
         onChange={handleChange}
@@ -97,7 +97,7 @@ const LeverageSliderHandle = forwardRef<Handle, HandleProps>(function LeverageSl
   return (
     <SliderTooltip
       prefixCls="rc-slider-tooltip"
-      overlay={`${parseFloat(displayValue.toString()).toFixed(2)}x`}
+      overlay={`${parseFloat(displayValue.toString()).toFixed(3)}x`}
       visible={dragging}
       placement="top"
       key={index}
@@ -110,7 +110,7 @@ const LeverageSliderHandle = forwardRef<Handle, HandleProps>(function LeverageSl
 
 function generateEquallySpacedArray(min: number, max: number, shouldIncludeMax?: boolean): number[] {
   const step = (max - min) / 10;
-  let array = range(min, max, step).map((num) => parseFloat(num.toFixed(1)));
+  let array = range(min, max, step).map((num) => parseFloat(num.toFixed(2)));
 
   if (shouldIncludeMax && array[array.length - 1] !== max) {
     array.push(max);
