@@ -574,7 +574,7 @@ export function useTradeboxState(
         return;
       }
 
-      const truncatedValue = Math.trunc(numberValue * 10) / 10;
+      const truncatedValue = Math.trunc(numberValue * 100) / 100;
 
       let stringValue = truncatedValue.toString();
 

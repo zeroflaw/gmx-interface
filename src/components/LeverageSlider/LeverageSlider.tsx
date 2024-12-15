@@ -26,7 +26,7 @@ type HandleProps = {
 function getMarksWithLabel(marks: number[]) {
   return marks.reduce(
     (marks, value, index) => {
-      marks[index * 100] = `${value}x`;
+      marks[index * 10] = `${value}x`;
       return marks;
     },
     {} as { [key: number]: string }
@@ -47,7 +47,7 @@ export function LeverageSlider(p: Props) {
   const firstKey = valueKeyMap[firstValue];
   const sliderKey = value === undefined ? firstKey : valueKeyMap[value] ?? sliderValueToSliderKey(keyValueMap, value);
 
-  const max = (finalMarks.length - 1) * 100;
+  const max = (finalMarks.length - 1) * 10;
 
   const handleChange = useCallback(
     (newKey: number) => {
@@ -72,7 +72,7 @@ export function LeverageSlider(p: Props) {
       <Slider
         min={0}
         max={max}
-        step={0.01}
+        step={0.1}
         marks={marksLabel}
         handle={customHandle}
         onChange={handleChange}
@@ -97,7 +97,7 @@ const LeverageSliderHandle = forwardRef<Handle, HandleProps>(function LeverageSl
   return (
     <SliderTooltip
       prefixCls="rc-slider-tooltip"
-      overlay={`${parseFloat(displayValue.toString()).toFixed(3)}x`}
+      overlay={`${parseFloat(displayValue.toString()).toFixed(2)}x`}
       visible={dragging}
       placement="top"
       key={index}
@@ -109,8 +109,8 @@ const LeverageSliderHandle = forwardRef<Handle, HandleProps>(function LeverageSl
 });
 
 function generateEquallySpacedArray(min: number, max: number, shouldIncludeMax?: boolean): number[] {
-  const step = (max - min) / 100;
-  let array = range(min, max, step).map((num) => parseFloat(num.toFixed(2)));
+  const step = (max - min) / 10;
+  let array = range(min, max, step).map((num) => parseFloat(num.toFixed(1)));
 
   if (shouldIncludeMax && array[array.length - 1] !== max) {
     array.push(max);
