@@ -26,7 +26,7 @@ type HandleProps = {
 function getMarksWithLabel(marks: number[]) {
   return marks.reduce(
     (marks, value, index) => {
-      marks[index * 10] = `${value}x`;
+      marks[index * 100] = `${value}x`;
       return marks;
     },
     {} as { [key: number]: string }
@@ -47,7 +47,7 @@ export function LeverageSlider(p: Props) {
   const firstKey = valueKeyMap[firstValue];
   const sliderKey = value === undefined ? firstKey : valueKeyMap[value] ?? sliderValueToSliderKey(keyValueMap, value);
 
-  const max = (finalMarks.length - 1) * 10;
+  const max = (finalMarks.length - 1) * 100;
 
   const handleChange = useCallback(
     (newKey: number) => {
