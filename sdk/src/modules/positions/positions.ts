@@ -203,26 +203,7 @@ export class Positions extends Module {
   }
 
   private getUiFeeFactorRequest(): Promise<bigint> {
-    if (!this.account) {
-      return Promise.resolve(0n);
-    }
-
-    return this.sdk
-      .executeMulticall({
-        dataStore: {
-          contractAddress: getContract(this.chainId, "DataStore"),
-          abi: DataStore.abi,
-          calls: {
-            keys: {
-              methodName: "getUint",
-              params: [uiFeeFactorKey(this.account)],
-            },
-          },
-        },
-      })
-      .then((res) => {
-        return BigInt(res.data.dataStore.keys.returnValues[0] ?? 0n);
-      });
+    return Promise.resolve(BigInt(0));
   }
 
   private _positionsConstants: PositionsConstantsResult | undefined = undefined;
