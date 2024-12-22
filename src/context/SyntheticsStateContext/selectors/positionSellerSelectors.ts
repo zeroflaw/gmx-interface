@@ -46,6 +46,7 @@ export const selectPositionSeller = (state: SyntheticsState) => state.positionSe
 export const selectPositionSellerOrderOption = (state: SyntheticsState) => state.positionSeller.orderOption;
 export const selectPositionSellerTriggerPriceInputValue = (state: SyntheticsState) =>
   state.positionSeller.triggerPriceInputValue;
+export const selectPositionSellerKeepCollateralRaw = (state: SyntheticsState) => state.positionSeller.keepCollateral;
 export const selectPositionSellerKeepLeverageRaw = (state: SyntheticsState) => state.positionSeller.keepLeverage;
 export const selectPositionSellerSelectedTriggerAcceptablePriceImpactBps = (state: SyntheticsState) =>
   state.positionSeller.selectedTriggerAcceptablePriceImpactBps;
@@ -130,6 +131,29 @@ const selectPositionSellerDecreaseAmountsWithKeepLeverage = createSelector((q) =
   const selector = makeSelectDecreasePositionAmounts({ ...decreaseAmountArgs, keepLeverage: true });
 
   return q(selector);
+});
+
+export const selectPositionSellerKeepCollateral = createSelector((q) => {
+  const position = q(selectPositionSellerPosition);
+
+  if (!position) return false;
+
+  const keepCollateral = q(selectPositionSellerKeepCollateralRaw);
+
+  if (!keepCollateral) return false;
+
+  const disabledByCollateral = q(selectPositionSellerCollateralDisabledByCollateral);
+
+  return !disabledByCollateral;
+})
+
+export const selectPositionSellerCollateralDisabledByCollateral = createSelector((q) => {
+  const position = q(selectPositionSellerPosition);
+
+  if (!getIsPositionInfoLoaded(position)) return false;
+
+  //TODO: is this correct?
+  return true;
 });
 
 export const selectPositionSellerKeepLeverage = createSelector((q) => {

@@ -8,6 +8,8 @@ import Tooltip from "components/Tooltip/Tooltip";
 import { ValueTransition } from "components/ValueTransition/ValueTransition";
 import {
   usePositionSeller,
+  usePositionSellerKeepCollateral,
+  usePositionSellerCollateralDisabledByCollateral,
   usePositionSellerKeepLeverage,
   usePositionSellerLeverageDisabledByCollateral,
 } from "context/SyntheticsStateContext/hooks/positionSellerHooks";
@@ -45,12 +47,16 @@ export function PositionSellerAdvancedRows(p: Props) {
     defaultTriggerAcceptablePriceImpactBps,
     orderOption,
     setAllowedSlippage,
+    setKeepCollateral,
     setKeepLeverage,
     setSelectedTriggerAcceptablePriceImpactBps,
     selectedTriggerAcceptablePriceImpactBps,
   } = usePositionSeller();
   const keepLeverage = usePositionSellerKeepLeverage();
   const leverageCheckboxDisabledByCollateral = usePositionSellerLeverageDisabledByCollateral();
+
+  const keepCollateral = usePositionSellerKeepCollateral();
+  const collateralCheckboxDisabledByCollateral = usePositionSellerCollateralDisabledByCollateral();
 
   const isTrigger = orderOption === OrderOption.Trigger;
 
@@ -117,6 +123,7 @@ export function PositionSellerAdvancedRows(p: Props) {
       />
     ));
 
+  const keepCollateralChecked = !decreaseAmounts?.isFullClose ? false : keepCollateral ?? false;
   const keepLeverageChecked = decreaseAmounts?.isFullClose ? false : keepLeverage ?? false;
   let keepLeverageAtValue: string | undefined = "...";
   if (position?.leverage && !decreaseAmounts?.isFullClose) {
@@ -166,6 +173,16 @@ export function PositionSellerAdvancedRows(p: Props) {
       <div className="App-card-divider" />
       <ExchangeInfoRow label={t`Leverage`} value={leverageValue} />
 
+      <div className="PositionEditor-keep-collateral-settings">
+        <ToggleSwitch
+          textClassName="Exchange-info-label"
+          isChecked={collateralCheckboxDisabledByCollateral ? false : keepCollateralChecked}
+          setIsChecked={setKeepCollateral}
+          disabled={collateralCheckboxDisabledByCollateral ?? !decreaseAmounts?.isFullClose}
+        >
+          {keepLeverageTextElem}
+        </ToggleSwitch>
+      </div>
       <div className="PositionEditor-keep-leverage-settings">
         <ToggleSwitch
           textClassName="Exchange-info-label"
