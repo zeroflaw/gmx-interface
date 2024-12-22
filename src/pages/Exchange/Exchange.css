@@ -216,6 +216,15 @@
   margin-bottom: 1.05rem;
 }
 
+.PositionEditor-keep-collateral-settings .Checkbox {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  direction: rtl;
+  font-size: var(--font-size-body-medium);
+  margin-bottom: 0.465rem;
+}
+
 .PositionEditor-keep-leverage-settings .Checkbox {
   width: 100%;
   display: grid;

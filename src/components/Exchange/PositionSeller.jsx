@@ -223,6 +223,7 @@ export default function PositionSeller(props) {
     isContractAccount,
   } = props;
   const [savedSlippageAmount] = useLocalStorageSerializeKey([chainId, SLIPPAGE_BPS_KEY], DEFAULT_SLIPPAGE_AMOUNT);
+  const [keepCollateral, setKeepCollateral] = useLocalStorageSerializeKey([chainId, "Exchange-keep-collateral"], true);
   const [keepLeverage, setKeepLeverage] = useLocalStorageSerializeKey([chainId, "Exchange-keep-leverage"], true);
   const position = positionsMap && positionKey ? positionsMap[positionKey] : undefined;
   const [fromValue, setFromValue] = useState("");
@@ -445,7 +446,13 @@ export default function PositionSeller(props) {
       adjustedDelta = bigMath.mulDiv(nextDelta, sizeDelta, position.size);
     }
 
-    if (keepLeverage && sizeDelta && !isClosing) {
+    //if (keepCollateral && isClosing && nextHasProfit && !keepLeverage) {
+       // TODO: is this correct?
+       // Remove all collateral
+       collateralDelta = position.collateral;
+    //}
+
+    if (keepLeverage && sizeDelta && !isClosing && !keepCollateral) {
       // Calculating the collateralDelta needed to keep the next leverage same as current leverage
       collateralDelta =
         position.collateral -
@@ -1149,6 +1156,13 @@ export default function PositionSeller(props) {
                 </Checkbox>
               </div>
             )}
+            <div className="PositionEditor-keep-collateral-settings">
+              <ToggleSwitch isChecked={keepCollateral} setIsChecked={setKeepCollateral}>
+                <span className="text-gray-300">
+                  <Trans>Keep collateral</Trans>
+                </span>
+              </ToggleSwitch>
+            </div>
             <div className="PositionEditor-keep-leverage-settings">
               <ToggleSwitch isChecked={keepLeverage} setIsChecked={setKeepLeverage}>
                 <span className="text-gray-300">
