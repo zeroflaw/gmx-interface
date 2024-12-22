@@ -142,9 +142,10 @@ export const selectPositionSellerKeepCollateral = createSelector((q) => {
 
   if (!keepCollateral) return false;
 
-  const disabledByCollateral = q(selectPositionSellerCollateralDisabledByCollateral);
+  //const disabledByCollateral = q(selectPositionSellerCollateralDisabledByCollateral);
 
-  return !disabledByCollateral;
+  //return !disabledByCollateral;
+  return true;
 })
 
 export const selectPositionSellerCollateralDisabledByCollateral = createSelector((q) => {

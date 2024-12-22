@@ -123,7 +123,7 @@ export function PositionSellerAdvancedRows(p: Props) {
       />
     ));
 
-  const keepCollateralChecked = keepCollateral ?? false;
+  const keepCollateralChecked = keepCollateral;
   const keepCollateralText = <Trans>Keep Collateral</Trans>;
   const renderKeepCollateralTooltipContent = useCallback(
     () => (
@@ -133,7 +133,7 @@ export function PositionSellerAdvancedRows(p: Props) {
     ),
     []
   );
-  const keepCollateralTextElem = leverageCheckboxDisabledByCollateral ? (
+  const keepCollateralTextElem = collateralCheckboxDisabledByCollateral ? (
     <TooltipWithPortal handle={keepCollateralText} renderContent={renderKeepCollateralTooltipContent} />
   ) : (
     keepCollateralText
