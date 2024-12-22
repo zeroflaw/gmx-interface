@@ -128,7 +128,7 @@ export function PositionSellerAdvancedRows(p: Props) {
   const renderKeepCollateralTooltipContent = useCallback(
     () => (
       <Trans>
-        Keep collateral (TODO).{" "}
+        Keep collateral (TODO).
       </Trans>
     ),
     []
@@ -139,7 +139,7 @@ export function PositionSellerAdvancedRows(p: Props) {
     keepCollateralText
   );
 
-  const keepLeverageChecked = decreaseAmounts?.isFullClose ? false : keepLeverage ?? false;
+  const keepLeverageChecked = keepLeverage ?? false;
   let keepLeverageAtValue: string | undefined = "...";
   if (position?.leverage && !decreaseAmounts?.isFullClose) {
     keepLeverageAtValue = formatLeverage(position.leverage);
@@ -186,8 +186,6 @@ export function PositionSellerAdvancedRows(p: Props) {
       {isTrigger && acceptablePriceImpactInputRow}
       {!isTrigger && <AllowedSlippageRow allowedSlippage={allowedSlippage} setAllowedSlippage={setAllowedSlippage} />}
       <div className="App-card-divider" />
-      <ExchangeInfoRow label={t`Leverage`} value={leverageValue} />
-
       <div className="PositionEditor-keep-collateral-settings">
         <ToggleSwitch
           textClassName="Exchange-info-label"
@@ -198,6 +196,8 @@ export function PositionSellerAdvancedRows(p: Props) {
           {keepCollateralTextElem}
         </ToggleSwitch>
       </div>
+      
+      <ExchangeInfoRow label={t`Leverage`} value={leverageValue} />
       <div className="PositionEditor-keep-leverage-settings">
         <ToggleSwitch
           textClassName="Exchange-info-label"
