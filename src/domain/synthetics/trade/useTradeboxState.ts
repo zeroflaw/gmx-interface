@@ -566,7 +566,7 @@ export function useTradeboxState(
       const sanitizedValue = value.replace(",", ".");
 
       const endsInDot = sanitizedValue.endsWith(".");
-      const endsInDotZero = sanitizedValue.endsWith(".0");
+      const endsInZero = sanitizedValue.endsWith("0");
 
       const numberValue = parseFloat(sanitizedValue);
 
@@ -582,8 +582,8 @@ export function useTradeboxState(
       if (endsInDot) {
         stringValue += ".";
       }
-      if (endsInDotZero) {
-        stringValue += ".0";
+      if (endsInZero) {
+        stringValue += "0";
       }
 
       setLeverageInputValue(stringValue);
