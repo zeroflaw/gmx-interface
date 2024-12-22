@@ -446,11 +446,11 @@ export default function PositionSeller(props) {
       adjustedDelta = bigMath.mulDiv(nextDelta, sizeDelta, position.size);
     }
 
-    if (keepCollateral && sizeDelta && isClosing && nextHasProfit && !keepLeverage) {
+    //if (keepCollateral && isClosing && nextHasProfit && !keepLeverage) {
        // TODO: is this correct?
        // Remove all collateral
        collateralDelta = position.collateral;
-    }
+    //}
 
     if (keepLeverage && sizeDelta && !isClosing && !keepCollateral) {
       // Calculating the collateralDelta needed to keep the next leverage same as current leverage
