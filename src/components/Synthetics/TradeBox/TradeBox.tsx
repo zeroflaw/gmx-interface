@@ -268,7 +268,7 @@ export function TradeBox(p: Props) {
   const closeSizeUsd = parseValue(closeSizeInputValue || "0", USD_DECIMALS)!;
   const triggerPrice = useSelector(selectTradeboxTriggerPrice);
 
-  const uiFeeFactor = BigInt(0);
+  const uiFeeFactor = useUiFeeFactor();
 
   const markPrice = useSelector(selectTradeboxMarkPrice);
   const nextLeverageWithoutPnl = useSelector(selectTradeboxNextLeverageWithoutPnl);
