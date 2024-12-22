@@ -1,4 +1,4 @@
-import { getKeepCollateralKey, getKeepLeverageKey, getSyntheticsReceiveMoneyTokenKey } from "config/localStorage";
+import { getKeepLeverageKey, getSyntheticsReceiveMoneyTokenKey } from "config/localStorage";
 import { useSettings } from "context/SettingsContext/SettingsContextProvider";
 import { useLocalStorageSerializeKey } from "lib/localStorage";
 import { useCallback, useMemo, useState } from "react";
@@ -15,7 +15,6 @@ export function usePositionSellerState(chainId: number, closingPosition: Positio
   const { savedAllowedSlippage } = useSettings();
   const [orderOption, setOrderOption] = useState<OrderOption>(OrderOption.Market);
   const [triggerPriceInputValue, setTriggerPriceInputValue] = useState("");
-  const [keepCollateral, setKeepCollateral] = useLocalStorageSerializeKey(getKeepCollateralKey(chainId), true);
   const [keepLeverage, setKeepLeverage] = useLocalStorageSerializeKey(getKeepLeverageKey(chainId), true);
   const [defaultTriggerAcceptablePriceImpactBps, setDefaultTriggerAcceptablePriceImpactBps] = useState<bigint>();
   const [selectedTriggerAcceptablePriceImpactBps, setSelectedTriggerAcceptablePriceImpactBps] = useState<bigint>();
@@ -61,8 +60,6 @@ export function usePositionSellerState(chainId: number, closingPosition: Positio
     handleSetOrderOption,
     triggerPriceInputValue,
     setTriggerPriceInputValue,
-    keepCollateral,
-    setKeepCollateral,
     keepLeverage,
     setKeepLeverage,
     defaultTriggerAcceptablePriceImpactBps,

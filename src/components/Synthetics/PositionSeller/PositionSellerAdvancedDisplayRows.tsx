@@ -8,8 +8,6 @@ import Tooltip from "components/Tooltip/Tooltip";
 import { ValueTransition } from "components/ValueTransition/ValueTransition";
 import {
   usePositionSeller,
-  usePositionSellerKeepCollateral,
-  usePositionSellerCollateralDisabledByCollateral,
   usePositionSellerKeepLeverage,
   usePositionSellerLeverageDisabledByCollateral,
 } from "context/SyntheticsStateContext/hooks/positionSellerHooks";
@@ -47,16 +45,12 @@ export function PositionSellerAdvancedRows(p: Props) {
     defaultTriggerAcceptablePriceImpactBps,
     orderOption,
     setAllowedSlippage,
-    setKeepCollateral,
     setKeepLeverage,
     setSelectedTriggerAcceptablePriceImpactBps,
     selectedTriggerAcceptablePriceImpactBps,
   } = usePositionSeller();
   const keepLeverage = usePositionSellerKeepLeverage();
   const leverageCheckboxDisabledByCollateral = usePositionSellerLeverageDisabledByCollateral();
-
-  const keepCollateral = usePositionSellerKeepCollateral();
-  const collateralCheckboxDisabledByCollateral = usePositionSellerCollateralDisabledByCollateral();
 
   const isTrigger = orderOption === OrderOption.Trigger;
 
@@ -123,22 +117,6 @@ export function PositionSellerAdvancedRows(p: Props) {
       />
     ));
 
-  const keepCollateralChecked = keepCollateral;
-  const keepCollateralText = <Trans>Keep Collateral</Trans>;
-  const renderKeepCollateralTooltipContent = useCallback(
-    () => (
-      <Trans>
-        Keep collateral (TODO).
-      </Trans>
-    ),
-    []
-  );
-  const keepCollateralTextElem = collateralCheckboxDisabledByCollateral ? (
-    <TooltipWithPortal handle={keepCollateralText} renderContent={renderKeepCollateralTooltipContent} />
-  ) : (
-    keepCollateralText
-  );
-
   const keepLeverageChecked = decreaseAmounts?.isFullClose ? false : keepLeverage ?? false;
   let keepLeverageAtValue: string | undefined = "...";
   if (position?.leverage && !decreaseAmounts?.isFullClose) {
@@ -186,18 +164,8 @@ export function PositionSellerAdvancedRows(p: Props) {
       {isTrigger && acceptablePriceImpactInputRow}
       {!isTrigger && <AllowedSlippageRow allowedSlippage={allowedSlippage} setAllowedSlippage={setAllowedSlippage} />}
       <div className="App-card-divider" />
-
-      <div className="PositionEditor-keep-collateral-settings">
-        <ToggleSwitch
-          textClassName="Exchange-info-label"
-          isChecked={keepCollateralChecked}
-          setIsChecked={setKeepCollateral}
-          disabled={false}
-        >
-          {keepCollateralTextElem}
-        </ToggleSwitch>
-      </div>
       <ExchangeInfoRow label={t`Leverage`} value={leverageValue} />
+
       <div className="PositionEditor-keep-leverage-settings">
         <ToggleSwitch
           textClassName="Exchange-info-label"

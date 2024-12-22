@@ -23,7 +23,6 @@ export const TV_PARAMS_CACHE_KEY = "tv-params-cache-key";
 export const REDIRECT_POPUP_TIMESTAMP_KEY = "redirect-popup-timestamp";
 export const LEVERAGE_OPTION_KEY = "leverage-option";
 export const LEVERAGE_ENABLED_KEY = "leverage-enabled";
-export const KEEP_COLLATERAL_FOR_DECREASE_KEY = "Exchange-keep-collateral";
 export const KEEP_LEVERAGE_FOR_DECREASE_KEY = "Exchange-keep-leverage";
 export const TRADE_LINK_KEY = "trade-link";
 export const SHOW_DEBUG_VALUES_KEY = "show-debug-values";
@@ -111,10 +110,6 @@ export function getSyntheticsCollateralEditAddressKey(chainId: number, positionC
 
 export function getLeverageKey(chainId: number) {
   return [chainId, LEVERAGE_OPTION_KEY];
-}
-
-export function getKeepCollateralKey(chainId: number) {
-  return [chainId, KEEP_COLLATERAL_FOR_DECREASE_KEY];
 }
 
 export function getKeepLeverageKey(chainId: number) {
