@@ -124,6 +124,21 @@ export function PositionSellerAdvancedRows(p: Props) {
     ));
 
   const keepCollateralChecked = !decreaseAmounts?.isFullClose ? false : keepCollateral ?? false;
+  const keepCollateralText = <Trans>Keep Collateral</Trans>;
+  const renderKeepCollateralTooltipContent = useCallback(
+    () => (
+      <Trans>
+        Keep collateral (TODO).{" "}
+      </Trans>
+    ),
+    []
+  );
+  const keepCollateralTextElem = leverageCheckboxDisabledByCollateral ? (
+    <TooltipWithPortal handle={keepCollateralText} renderContent={renderKeepCollateralTooltipContent} />
+  ) : (
+    keepCollateralText
+  );
+
   const keepLeverageChecked = decreaseAmounts?.isFullClose ? false : keepLeverage ?? false;
   let keepLeverageAtValue: string | undefined = "...";
   if (position?.leverage && !decreaseAmounts?.isFullClose) {
@@ -176,11 +191,11 @@ export function PositionSellerAdvancedRows(p: Props) {
       <div className="PositionEditor-keep-collateral-settings">
         <ToggleSwitch
           textClassName="Exchange-info-label"
-          isChecked={collateralCheckboxDisabledByCollateral ? false : keepCollateralChecked}
+          isChecked={keepCollateralChecked}
           setIsChecked={setKeepCollateral}
-          disabled={collateralCheckboxDisabledByCollateral ?? !decreaseAmounts?.isFullClose}
+          disabled={false}
         >
-          {keepLeverageTextElem}
+          {keepCollateralTextElem}
         </ToggleSwitch>
       </div>
       <div className="PositionEditor-keep-leverage-settings">
