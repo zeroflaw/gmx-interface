@@ -8,6 +8,7 @@ export * from "./static/chains";
 
 const { parseEther } = ethers;
 
+export const ENV_ARBITRUM_RPC_DEFAULT_URL = import.meta.env.VITE_APP_ARBITRUM_RPC_DEFAULT_URL;
 export const ENV_ARBITRUM_RPC_URLS = import.meta.env.VITE_APP_ARBITRUM_RPC_URLS;
 export const ENV_AVALANCHE_RPC_URLS = import.meta.env.VITE_APP_AVALANCHE_RPC_URLS;
 
@@ -199,6 +200,7 @@ export const RPC_PROVIDERS = {
   ],
   [BSС_TESTNET]: ["https://data-seed-prebsc-1-s1.binance.org:8545/"],
   [ARBITRUM]: [
+    ENV_ARBITRUM_RPC_DEFAULT_URL,
     "https://arb1.arbitrum.io/rpc",
     "https://arbitrum-one-rpc.publicnode.com",
     "https://1rpc.io/arb",
