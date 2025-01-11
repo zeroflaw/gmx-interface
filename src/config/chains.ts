@@ -9,6 +9,7 @@ export * from "./static/chains";
 const { parseEther } = ethers;
 
 export const ENV_ARBITRUM_RPC_DEFAULT_URL = import.meta.env.VITE_APP_ARBITRUM_RPC_DEFAULT_URL;
+export const ENV_ARBITRUM_RPC_DEFAULT_WEBSOCKET = import.meta.env.VITE_APP_ARBITRUM_RPC_DEFAULT_WEBSOCKET;
 export const ENV_ARBITRUM_RPC_URLS = import.meta.env.VITE_APP_ARBITRUM_RPC_URLS;
 export const ENV_AVALANCHE_RPC_URLS = import.meta.env.VITE_APP_AVALANCHE_RPC_URLS;
 
@@ -317,6 +318,9 @@ function getAlchemyKey() {
 }
 
 export function getAlchemyArbitrumHttpUrl() {
+  //if (ENV_ARBITRUM_RPC_DEFAULT_URL.startsWith("https")) {
+  //  return ENV_ARBITRUM_RPC_DEFAULT_URL
+  //}
   return `https://arb-mainnet.g.alchemy.com/v2/${getAlchemyKey()}`;
 }
 
@@ -325,7 +329,11 @@ export function getAlchemyAvalancheHttpUrl() {
 }
 
 export function getAlchemyArbitrumWsUrl() {
+  if (ENV_ARBITRUM_RPC_DEFAULT_WEBSOCKET.startsWith("wss")) {
+    return ENV_ARBITRUM_RPC_DEFAULT_WEBSOCKET
+  }
   return `wss://arb-mainnet.g.alchemy.com/v2/${getAlchemyKey()}`;
+  
 }
 
 export function getExplorerUrl(chainId) {
