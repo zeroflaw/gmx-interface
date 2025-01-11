@@ -201,12 +201,12 @@ export const RPC_PROVIDERS = {
   [BSС_TESTNET]: ["https://data-seed-prebsc-1-s1.binance.org:8545/"],
   [ARBITRUM]: [
     ENV_ARBITRUM_RPC_DEFAULT_URL,
-    "https://arb1.arbitrum.io/rpc",
-    "https://arbitrum-one-rpc.publicnode.com",
-    "https://1rpc.io/arb",
-    "https://arbitrum-one.public.blastapi.io",
-    // "https://arbitrum.drpc.org",
-    "https://rpc.ankr.com/arbitrum",
+    //"https://arb1.arbitrum.io/rpc",
+    //"https://arbitrum-one-rpc.publicnode.com",
+    //"https://1rpc.io/arb",
+    //"https://arbitrum-one.public.blastapi.io",
+    //// "https://arbitrum.drpc.org",
+    //"https://rpc.ankr.com/arbitrum",
   ],
   [AVALANCHE]: [
     "https://api.avax.network/ext/bc/C/rpc",
