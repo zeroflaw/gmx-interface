@@ -86,9 +86,9 @@ function trackRpcProviders({ warmUp = false } = {}) {
         !lastUsage || differenceInMilliseconds(Date.now(), lastUsage) > DISABLE_UNUSED_TRACKING_TIMEOUT;
       const isChainTrackingEnabled = (warmUp || !isUnusedChain) && hasMultipleProviders;
 
-      if (!isChainTrackingEnabled) {
+     // if (!isChainTrackingEnabled) {
         return;
-      }
+     // }
 
       await getBestRpcProvidersForChain(chainTrackerState)
         .catch((e) => {

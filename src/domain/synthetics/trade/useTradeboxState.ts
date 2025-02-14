@@ -561,6 +561,7 @@ export function useTradeboxState(
       const sanitizedValue = value.replace(",", ".");
 
       const endsInDot = sanitizedValue.endsWith(".");
+      const endsInZero = sanitizedValue.endsWith("0");
 
       const numberValue = parseFloat(sanitizedValue);
 
@@ -569,12 +570,15 @@ export function useTradeboxState(
         return;
       }
 
-      const truncatedValue = Math.trunc(numberValue * 10) / 10;
+      const truncatedValue = Math.trunc(numberValue * 1000) / 1000;
 
       let stringValue = truncatedValue.toString();
 
       if (endsInDot) {
         stringValue += ".";
+      }
+      if (endsInZero) {
+        stringValue += "0";
       }
 
       setLeverageInputValue(stringValue);

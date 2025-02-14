@@ -253,7 +253,7 @@ export function getLeverage(p: {
 export function formatLeverage(leverage?: bigint) {
   if (leverage === undefined) return undefined;
 
-  return `${formatAmount(leverage, 4, 2)}x`;
+  return `${formatAmount(leverage, 4, 3)}x`;
 }
 
 export function getEstimatedLiquidationTimeInHours(

@@ -14,6 +14,8 @@ export const SUPPORTED_CHAIN_IDS = isDevelopment() ? SDK_SUPPORTED_CHAIN_IDS_DEV
 
 const { parseEther } = ethers;
 
+export const ENV_ARBITRUM_RPC_DEFAULT_URL = import.meta.env.VITE_APP_ARBITRUM_RPC_DEFAULT_URL;
+export const ENV_ARBITRUM_RPC_DEFAULT_WEBSOCKET = import.meta.env.VITE_APP_ARBITRUM_RPC_DEFAULT_WEBSOCKET;
 export const ENV_ARBITRUM_RPC_URLS = import.meta.env.VITE_APP_ARBITRUM_RPC_URLS;
 export const ENV_AVALANCHE_RPC_URLS = import.meta.env.VITE_APP_AVALANCHE_RPC_URLS;
 
@@ -122,12 +124,13 @@ export const RPC_PROVIDERS = {
   ],
   [BSС_TESTNET]: ["https://data-seed-prebsc-1-s1.binance.org:8545/"],
   [ARBITRUM]: [
-    "https://arb1.arbitrum.io/rpc",
-    "https://arbitrum-one-rpc.publicnode.com",
-    "https://1rpc.io/arb",
+    ENV_ARBITRUM_RPC_DEFAULT_URL,
+    // "https://arb1.arbitrum.io/rpc",
+    // "https://arbitrum-one-rpc.publicnode.com",
+    // "https://1rpc.io/arb",
     // "https://arbitrum-one.public.blastapi.io",
     // "https://arbitrum.drpc.org",
-    "https://rpc.ankr.com/arbitrum",
+    // "https://rpc.ankr.com/arbitrum",
   ],
   [AVALANCHE]: [
     "https://api.avax.network/ext/bc/C/rpc",
@@ -252,6 +255,9 @@ export function getAlchemyAvalancheHttpUrl() {
 }
 
 export function getAlchemyArbitrumWsUrl() {
+  if (ENV_ARBITRUM_RPC_DEFAULT_WEBSOCKET.startsWith("wss")) {
+    return ENV_ARBITRUM_RPC_DEFAULT_WEBSOCKET
+  }
   return `wss://arb-mainnet.g.alchemy.com/v2/${getAlchemyKey()}`;
 }
 

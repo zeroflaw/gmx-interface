@@ -883,7 +883,7 @@ export function TradeBox() {
                       isSlim
                     />
                     <SuggestionInput
-                      className="w-48"
+                      className="SwapBox-leverage-input"
                       value={leverageInputValue}
                       setValue={setLeverageInputValue}
                       onBlur={handleLeverageInputBlur}
